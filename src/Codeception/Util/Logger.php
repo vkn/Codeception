@@ -330,7 +330,8 @@ class Logger {
      * @param mixed $message
      * @return bool
      */
-    public static function exception($message, $suffix='') {
+    public static function exception(\Exception $e, $suffix='') {
+        $message = $e->getTraceAsString().PHP_EOL.$e;
         return self::log($message, $suffix ? 'EXCEPTION: ' . $suffix : 'EXCEPTION:');
     }
 
@@ -456,16 +457,8 @@ class Logger {
          * We also use the human-readable format for arrays.
          */
         if (is_object($message)) {
-            if (method_exists($message, 'getmessage')) {
-                $message = $message->getMessage();
-            } else if (method_exists($message, 'tostring')) {
-                $message = $message->toString();
-            } else if (method_exists($message, '__tostring')) {
-                $message = (string) $message;
-            } else {
-                //$message = var_export($message, true);
-		$message = "<pre>" . print_r($message, 1) . "</pre>";
-	    }
+            //$message = var_export($message, true);
+            $message = "<pre>" . print_r($message, 1) . "</pre>";
         } else if (is_array($message)) {
             if (isset($message['message'])) {
                 if (is_scalar($message['message'])) {
