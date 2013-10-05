@@ -11,6 +11,8 @@ if (file_exists(__DIR__ . '/../sandbox/c3.php')) {
 require_once('glue.php');
 require_once('data.php');
 require_once('controllers.php');
+require_once '../../../src/Codeception/Util/Logger.php';
+Codeception\Util\Logger::setFile('../../../application.log');
 
 $urls = array(
     '/' => 'index',

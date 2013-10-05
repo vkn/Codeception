@@ -5,6 +5,7 @@
  */
 
 require_once dirname(__FILE__).'/autoload.php';
+Codeception\Util\Logger::setFile(__DIR__.'/application.log');
 
 use Symfony\Component\Console\Application,
     Symfony\Component\Console\Input\InputOption;
